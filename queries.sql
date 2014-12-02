@@ -230,3 +230,169 @@ WHERE datediff(curdate(), checkout_date) <= 7;
 |      18 |      87 | 2014-11-28 00:00:00 |
 |      26 |      22 | 2014-11-25 00:00:00 |
 +---------+---------+---------------------+
+<<<<<<< HEAD
+=======
+*/
+
+/* Select users with more than 0 fees in order from most fees to least fees */
+SELECT user_id, name, COUNT(fee_id) AS fee_count
+FROM Users NATURAL JOIN Rentals
+GROUP BY user_id
+HAVING COUNT(fee_id) > 0
+ORDER BY fee_count DESC;
+
++---------+----------------------+---------------+
+| user_id | name                 | COUNT(fee_id) |
++---------+----------------------+---------------+
+|       3 | Miss Angelina Kertzm |             4 | 
+|       4 | Lue Pfannerstill     |             2 | 
+|       5 | Mrs. Odessa Blanda   |             2 | 
+|       6 | Ashtyn Bruen         |             1 | 
+|       7 | Marcelino Bins       |             4 | 
+|       9 | Delpha Wiza          |             1 | 
+|      10 | Ford Stoltenberg     |             4 | 
+|      11 | Monty Gutmann        |             4 | 
+|      12 | Dahlia Larkin V      |             1 | 
+|      13 | Lulu Olson           |             4 | 
+|      14 | Mr. Declan Rosenbaum |             2 | 
+|      15 | Alvina Ryan          |             1 | 
+|      16 | Warren Toy           |             2 | 
+|      17 | Emma Mosciski        |             5 | 
+|      18 | Shanelle Dare        |             6 | 
+|      19 | Dean Turcotte        |             4 | 
+|      20 | Adela Ratke          |             3 | 
+|      21 | Dorcas Bode          |             1 | 
+|      22 | Tommie Deckow V      |             5 | 
+|      24 | Grant Borer          |             2 | 
+|      25 | Madilyn Swaniawski   |             5 | 
+|      26 | Donavon Walsh DDS    |             3 | 
+|      27 | Brody Marks          |             2 | 
+|      28 | Gladys Johnston      |             5 | 
+|      29 | Alec Dibbert         |             2 | 
+|      30 | Demetris Stiedemann  |             5 | 
+|      31 | Cleo Cassin          |             4 | 
+|      32 | Melvina Schmeler     |             1 | 
+|      33 | Wilfred King V       |             3 | 
+|      35 | Zena Terry           |             1 | 
++---------+----------------------+---------------+
+
+/* Users the have checked out at least 5 books */
+SELECT user_id, name, COUNT(book_id) AS books_rented
+FROM Books NATURAL JOIN Rentals NATURAL JOIN Users
+GROUP BY user_id
+HAVING COUNT(book_id) >= 5
+ORDER BY books_rented DESC;
+
++---------+----------------------+--------------+
+| user_id | name                 | books_rented |
++---------+----------------------+--------------+
+|      22 | Tommie Deckow V      |           10 | 
+|      17 | Emma Mosciski        |           10 | 
+|      18 | Shanelle Dare        |           10 | 
+|      25 | Madilyn Swaniawski   |           10 | 
+|      20 | Adela Ratke          |           10 | 
+|       4 | Lue Pfannerstill     |            9 | 
+|      28 | Gladys Johnston      |            9 | 
+|      16 | Warren Toy           |            8 | 
+|       6 | Ashtyn Bruen         |            8 | 
+|      30 | Demetris Stiedemann  |            8 | 
+|       7 | Marcelino Bins       |            8 | 
+|      19 | Dean Turcotte        |            8 | 
+|      26 | Donavon Walsh DDS    |            8 | 
+|       3 | Miss Angelina Kertzm |            8 | 
+|       5 | Mrs. Odessa Blanda   |            7 | 
+|      31 | Cleo Cassin          |            7 | 
+|      10 | Ford Stoltenberg     |            7 | 
+|      27 | Brody Marks          |            7 | 
+|      11 | Monty Gutmann        |            6 | 
+|      35 | Zena Terry           |            6 | 
+|      14 | Mr. Declan Rosenbaum |            6 | 
+|      15 | Alvina Ryan          |            6 | 
+|      21 | Dorcas Bode          |            5 | 
+|      29 | Alec Dibbert         |            5 | 
+|      24 | Grant Borer          |            5 | 
+|      13 | Lulu Olson           |            5 | 
++---------+----------------------+--------------+
+
+/* Users that have checked out at more than 1 book by the same author */
+SELECT user_id, Users.name AS user_name, Authors.name as author_name, COUNT(book_id) AS books_rented
+FROM Books NATURAL JOIN Rentals NATURAL JOIN Users JOIN Authors ON (Books.author_id = Authors.author_id)
+GROUP BY user_id, Authors.author_id
+HAVING COUNT(book_id) > 1
+ORDER BY books_rented DESC;
+
++---------+----------------------+----------------------+--------------+
+| user_id | user_name            | author_name          | books_rented |
++---------+----------------------+----------------------+--------------+
+|       6 | Ashtyn Bruen         | Mossie Langworth     |            4 | 
+|      22 | Tommie Deckow V      | Miss Isabella Legros |            3 | 
+|      28 | Gladys Johnston      | Kaya Kunze Jr.       |            3 | 
+|      16 | Warren Toy           | Mrs. Kody Kohler     |            3 | 
+|      27 | Brody Marks          | Kaya Kunze Jr.       |            3 | 
+|      18 | Shanelle Dare        | Jannie Emard         |            2 | 
+|      21 | Dorcas Bode          | Mossie Langworth     |            2 | 
+|      15 | Alvina Ryan          | Ms. Bethany Sawayn   |            2 | 
+|      26 | Donavon Walsh DDS    | Reuben Kunze         |            2 | 
+|       4 | Lue Pfannerstill     | Izabella Bartell I   |            2 | 
+|       4 | Lue Pfannerstill     | Mrs. Kody Kohler     |            2 | 
+|      13 | Lulu Olson           | Mrs. Kody Kohler     |            2 | 
+|      18 | Shanelle Dare        | Mrs. Kody Kohler     |            2 | 
+|      11 | Monty Gutmann        | Miss Isabella Legros |            2 | 
+|      14 | Mr. Declan Rosenbaum | Jannie Emard         |            2 | 
+|      25 | Madilyn Swaniawski   | Julian Wyman         |            2 | 
+|       5 | Mrs. Odessa Blanda   | Reuben Kunze         |            2 | 
+|      30 | Demetris Stiedemann  | Julian Wyman         |            2 | 
+|      31 | Cleo Cassin          | Mossie Langworth     |            2 | 
+|      35 | Zena Terry           | Mossie Langworth     |            2 | 
+|      10 | Ford Stoltenberg     | Izabella Bartell I   |            2 | 
+|      26 | Donavon Walsh DDS    | Adelbert Corwin      |            2 | 
+|      17 | Emma Mosciski        | Miss Isabella Legros |            2 | 
+|      20 | Adela Ratke          | Miss Isabella Legros |            2 | 
+|      20 | Adela Ratke          | Roderick Eichmann Sr |            2 | 
+|      20 | Adela Ratke          | Kaya Kunze Jr.       |            2 | 
+|       3 | Miss Angelina Kertzm | Mrs. Kody Kohler     |            2 | 
+|      29 | Alec Dibbert         | Reuben Kunze         |            2 | 
+|      24 | Grant Borer          | Adelbert Corwin      |            2 | 
+|       7 | Marcelino Bins       | Mrs. Kody Kohler     |            2 | 
++---------+----------------------+----------------------+--------------+
+
+/* Books that have never been rented */
+SELECT book_id, title, name AS author
+FROM Books NATURAL JOIN Authors
+WHERE book_id NOT IN
+  (SELECT book_id FROM Books NATURAL JOIN Rentals);
+  
++---------+------------------------------------------+----------------------+
+| book_id | title                                    | author               |
++---------+------------------------------------------+----------------------+
+|       3 | Digitized systematic project             | Breanne Murazik      | 
+|       8 | De-engineered multi-state infrastructure | Miss Monica Klein    | 
+|      12 | Down-sized 5th generation flexibility    | Miss Monica Klein    | 
+|      24 | Triple-buffered exuding parallelism      | Miss Isabella Legros | 
+|      41 | Innovative user-facing emulation         | Sigrid Herzog IV     | 
+|      44 | Persistent mission-critical migration    | Jannie Emard         | 
+|      49 | Function-based systemic model            | Mossie Langworth     | 
+|      54 | Front-line contextually-based ability    | Mossie Langworth     | 
+|      59 | Profound methodical parallelism          | Izabella Bartell I   | 
+|      71 | Persevering client-driven application    | Roderick Eichmann Sr | 
+|      82 | Face to face modular structure           | Alysson Stark        | 
++---------+------------------------------------------+----------------------+
+
+/* Authors Tommie Deckow V (user_id = 22) has rented a book by */
+SELECT DISTINCT Authors.author_id, Authors.name
+FROM Authors JOIN Books ON (Books.author_id = Authors.author_id) NATURAL JOIN Rentals JOIN Users ON (Rentals.user_id = Users.user_id)
+WHERE Users.user_id = 22;
+
++-----------+----------------------+
+| author_id | name                 |
++-----------+----------------------+
+| 3         | Miss Monica Klein    | 
+| 5         | Shyanne Jacobs       | 
+| 9         | Miss Isabella Legros | 
+| 10        | Kaya Kunze Jr.       | 
+| 15        | Izabella Bartell I   | 
+| 19        | Roderick Eichmann Sr | 
+| 21        | Adelbert Corwin      | 
+| 25        | Mrs. Kody Kohler     | 
++-----------+----------------------+
+>>>>>>> a336f83398485a08089bff42fccf6d6123263e99
