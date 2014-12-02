@@ -1,17 +1,17 @@
 /* Change rental from active to inactive */
-UPDATE Rental
+UPDATE Rentals
 	SET active = 0
 	WHERE rental_id = 3;
 
 /* Change book title */
 UPDATE Books
   SET title = "Pygmalion"
-	WHERE title = "Pigmalion"
+	WHERE title = "Pigmalion";
 
 /* Change user name */
 UPDATE Users
   SET name = "John Snow"
-  WHERE name = "Jon Snow"
+  WHERE name = "Jon Snow";
 
 /* Update a fee's balance */
 UPDATE Fees
