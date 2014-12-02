@@ -230,9 +230,6 @@ WHERE datediff(curdate(), checkout_date) <= 7;
 |      18 |      87 | 2014-11-28 00:00:00 |
 |      26 |      22 | 2014-11-25 00:00:00 |
 +---------+---------+---------------------+
-<<<<<<< HEAD
-=======
-*/
 
 /* Select users with more than 0 fees in order from most fees to least fees */
 SELECT user_id, name, COUNT(fee_id) AS fee_count
@@ -395,4 +392,3 @@ WHERE Users.user_id = 22;
 | 21        | Adelbert Corwin      | 
 | 25        | Mrs. Kody Kohler     | 
 +-----------+----------------------+
->>>>>>> a336f83398485a08089bff42fccf6d6123263e99
