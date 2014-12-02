@@ -26,3 +26,15 @@ CREATE TABLE Publishers(
 	name varchar(30),
 	PRIMARY KEY (publisher_id) );
 
+create table Users (user_id int NOT NULL, 
+	card_number varchar(255) NOT NULL, 
+	name varchar(20) NOT NULL, 
+	PRIMARY KEY(user_id, card_number));
+
+create table Fees (fee_id int NOT NULL, 
+	balance int NOT NULL, 
+	PRIMARY KEY(fee_id));
+
+create table Authors (author_id varchar(20) NOT NULL, 
+	name varchar(20) NOT NULL, 
+	PRIMARY KEY(author_id));
