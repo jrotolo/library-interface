@@ -5,7 +5,6 @@ GROUP BY user_id
 HAVING sum(balance) > 100
 ORDER BY total_balance DESC;
 
-/*
 +---------+---------------+-----------+
 | user_id | total_balance | fee_count |
 +---------+---------------+-----------+
@@ -40,7 +39,6 @@ ORDER BY total_balance DESC;
 |      15 |           242 |         1 | 
 |      32 |           231 |         1 | 
 +---------+---------------+-----------+
-*/
 
 /* Select the users with books that are overdue */
 SELECT user_id, name, count(rental_id) AS num_overdue_books
@@ -49,7 +47,6 @@ WHERE active = 1 AND CURDATE() > due_date
 GROUP BY user_id
 ORDER BY num_overdue_books DESC;
 
-/*
 +---------+----------------------+-------------------+
 | user_id | name                 | num_overdue_books |
 +---------+----------------------+-------------------+
@@ -81,7 +78,6 @@ ORDER BY num_overdue_books DESC;
 |      14 | Mr. Declan Rosenbaum |                 1 | 
 |      21 | Dorcas Bode          |                 1 | 
 +---------+----------------------+-------------------+
-*/
 
 
 
@@ -90,7 +86,6 @@ SELECT DISTINCT user_id, Users.name, book_id, title
 FROM Users NATURAL JOIN  Rentals NATURAL JOIN Books JOIN Authors ON (Books.author_id = Authors.author_id)
 WHERE Authors.name = 'Alysson Stark';
 
-/*
 +---------+----------------------+---------+-----------------------------------+
 | user_id | name                 | book_id | title                             |
 +---------+----------------------+---------+-----------------------------------+
@@ -100,13 +95,11 @@ WHERE Authors.name = 'Alysson Stark';
 |      24 | Grant Borer          |      81 | Advanced bi-directional framework | 
 |      25 | Madilyn Swaniawski   |      84 | Synergized secondary matrices     | 
 +---------+----------------------+---------+-----------------------------------+
-/*
 
 /* Find all users who have a rental */
 SELECT DISTINCT Users.user_id, Users.name
 FROM Users NATURAL JOIN Rental;
 
-/*
 +---------+----------------------+
 | user_id | name                 |
 +---------+----------------------+
@@ -142,7 +135,6 @@ FROM Users NATURAL JOIN Rental;
 |      33 | Wilfred King V       |
 |      35 | Zena Terry           |
 +---------+----------------------+
-*/
 
 /* Find all unique author and publisher pairs */
 SELECT r1.author_id, Authors.name as author_name, r1.publisher_id, Publishers.name as publisher_name
@@ -150,7 +142,6 @@ FROM (SELECT DISTINCT author_id, publisher_id
 FROM Books) as r1, Authors, Publishers
 WHERE r1.author_id=Authors.author_id AND r1.publisher_id=Publishers.publisher_id;
 
-/*
 +-----------+----------------------+--------------+--------------------------------+
 | author_id | author_name          | publisher_id | publisher_name                 |
 +-----------+----------------------+--------------+--------------------------------+
@@ -224,7 +215,6 @@ WHERE r1.author_id=Authors.author_id AND r1.publisher_id=Publishers.publisher_id
 |        25 | Mrs. Kody Kohler     |            8 | Lemke-Vandervort               |
 |        25 | Mrs. Kody Kohler     |            7 | Vandervort, Ferry and Moore    |
 +-----------+----------------------+--------------+--------------------------------+
-*/
 
 
 /* Find all users who have checked out a book in the past n days */
@@ -232,7 +222,6 @@ SELECT user_id, book_id, checkout_date
 FROM Rentals 
 WHERE datediff(curdate(), checkout_date) <= 7;
 
-/*
 +---------+---------+---------------------+
 | user_id | book_id | checkout_date       |
 +---------+---------+---------------------+
@@ -241,4 +230,3 @@ WHERE datediff(curdate(), checkout_date) <= 7;
 |      18 |      87 | 2014-11-28 00:00:00 |
 |      26 |      22 | 2014-11-25 00:00:00 |
 +---------+---------+---------------------+
-*/
