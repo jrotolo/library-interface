@@ -25,15 +25,15 @@ Books are also rented by many users through the rentals table.
 - publisher_id
 
 <div class='sql'>
-+--------------+--------------+------+-----+-------------------+-------+
-| Field        | Type         | Null | Key | Default           | Extra |
-+--------------+--------------+------+-----+-------------------+-------+
-| book_id      | int(11)      | NO   | PRI | NULL              |       |
-| title        | varchar(100) | YES  |     | NULL              |       |
-| publish_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       |
-| author_id    | int(11)      | NO   | MUL | NULL              |       |
-| publisher_id | int(11)      | NO   | MUL | NULL              |       |
-+--------------+--------------+------+-----+-------------------+-------+
++--------------+--------------+------+-----+-------------------+-------+<br />
+| Field        | Type         | Null | Key | Default           | Extra +<br />
++--------------+--------------+------+-----+-------------------+-------+<br />
+| book_id      | int(11)      | NO   | PRI | NULL              |       +<br />
+| title        | varchar(100) | YES  |     | NULL              |       +<br />
+| publish_date | timestamp    | NO   |     | CURRENT_TIMESTAMP |       +<br />
+| author_id    | int(11)      | NO   | MUL | NULL              |       +<br />
+| publisher_id | int(11)      | NO   | MUL | NULL              |       +<br />
++--------------+--------------+------+-----+-------------------+-------+<br />
 </div>
 
 
@@ -51,13 +51,13 @@ Users rent many books through the rentals table.
 - user_id -> name card_number
 
 <div class='sql'>
-+-------------+--------------+------+-----+---------+-------+
-| Field       | Type         | Null | Key | Default | Extra |
-+-------------+--------------+------+-----+---------+-------+
-| user_id     | int(11)      | NO   | PRI | NULL    |       |
-| card_number | varchar(255) | NO   | PRI | NULL    |       |
-| name        | varchar(20)  | NO   |     | NULL    |       |
-+-------------+--------------+------+-----+---------+-------+
++-------------+--------------+------+-----+---------+-------+<br />
+| Field       | Type         | Null | Key | Default | Extra +<br />
++-------------+--------------+------+-----+---------+-------+<br />
+| user_id     | int(11)      | NO   | PRI | NULL    |       +<br />
+| card_number | varchar(255) | NO   | PRI | NULL    |       +<br />
+| name        | varchar(20)  | NO   |     | NULL    |       +<br />
++-------------+--------------+------+-----+---------+-------+<br />
 </div>
 
 
@@ -75,12 +75,12 @@ Authors can write several book.
 - author_id -> name
 
 <div class='sql'>
-+-----------+-------------+------+-----+---------+-------+
-| Field     | Type        | Null | Key | Default | Extra |
-+-----------+-------------+------+-----+---------+-------+
-| author_id | varchar(20) | NO   | PRI | NULL    |       |
-| name      | varchar(20) | NO   |     | NULL    |       |
-+-----------+-------------+------+-----+---------+-------+
++-----------+-------------+------+-----+---------+-------+<br />
+| Field     | Type        | Null | Key | Default | Extra +<br />
++-----------+-------------+------+-----+---------+-------+<br />
+| author_id | varchar(20) | NO   | PRI | NULL    |       +<br />
+| name      | varchar(20) | NO   |     | NULL    |       +<br />
++-----------+-------------+------+-----+---------+-------+<br />
 </div>
 
 
@@ -98,12 +98,12 @@ Publishers can publish many books.
 - publisher_id -> name
 
 <div class='sql'>
-+--------------+-------------+------+-----+---------+-------+
-| Field        | Type        | Null | Key | Default | Extra |
-+--------------+-------------+------+-----+---------+-------+
-| publisher_id | int(11)     | NO   | PRI | NULL    |       |
-| name         | varchar(30) | YES  |     | NULL    |       |
-+--------------+-------------+------+-----+---------+-------+
++--------------+-------------+------+-----+---------+-------+<br />
+| Field        | Type        | Null | Key | Default | Extra +<br />
++--------------+-------------+------+-----+---------+-------+<br />
+| publisher_id | int(11)     | NO   | PRI | NULL    |       +<br />
+| name         | varchar(30) | YES  |     | NULL    |       +<br />
++--------------+-------------+------+-----+---------+-------+<br />
 </div>
 
 
@@ -116,12 +116,12 @@ Fees represent a fee associated with a rental.
 - fee_id
 
 <div class='sql'>
-+---------+---------+------+-----+---------+-------+
-| Field   | Type    | Null | Key | Default | Extra |
-+---------+---------+------+-----+---------+-------+
-| fee_id  | int(11) | NO   | PRI | NULL    |       |
-| balance | int(11) | NO   |     | NULL    |       |
-+---------+---------+------+-----+---------+-------+
++---------+---------+------+-----+---------+-------+<br />
+| Field   | Type    | Null | Key | Default | Extra +<br />
++---------+---------+------+-----+---------+-------+<br />
+| fee_id  | int(11) | NO   | PRI | NULL    |       +<br />
+| balance | int(11) | NO   |     | NULL    |       +<br />
++---------+---------+------+-----+---------+-------+<br />
 </div>
 
 
@@ -142,15 +142,15 @@ A fee only exists if the book is overdue, or if the book has been returned but t
 - fee_id
 
 <div class='sql'>
-+---------------+------------+------+-----+---------------------+-------+
-| Field         | Type       | Null | Key | Default             | Extra |
-+---------------+------------+------+-----+---------------------+-------+
-| rental_id     | int(11)    | NO   | PRI | NULL                |       |
-| user_id       | int(11)    | NO   | MUL | NULL                |       |
-| book_id       | int(11)    | NO   | MUL | NULL                |       |
-| fee_id        | int(11)    | YES  | MUL | NULL                |       |
-| due_date      | timestamp  | NO   |     | CURRENT_TIMESTAMP   |       |
-| checkout_date | timestamp  | NO   |     | 0000-00-00 00:00:00 |       |
-| active        | tinyint(1) | YES  |     | NULL                |       |
-+---------------+------------+------+-----+---------------------+-------+
++---------------+------------+------+-----+---------------------+-------+<br />
+| Field         | Type       | Null | Key | Default             | Extra +<br />
++---------------+------------+------+-----+---------------------+-------+<br />
+| rental_id     | int(11)    | NO   | PRI | NULL                |       +<br />
+| user_id       | int(11)    | NO   | MUL | NULL                |       +<br />
+| book_id       | int(11)    | NO   | MUL | NULL                |       +<br />
+| fee_id        | int(11)    | YES  | MUL | NULL                |       +<br />
+| due_date      | timestamp  | NO   |     | CURRENT_TIMESTAMP   |       +<br />
+| checkout_date | timestamp  | NO   |     | 0000-00-00 00:00:00 |       +<br />
+| active        | tinyint(1) | YES  |     | NULL                |       +<br />
++---------------+------------+------+-----+---------------------+-------+<br />
 </div>
